@@ -13,7 +13,6 @@ const WHATSAPP_NUMBER = "5521998580049"; // WhatsApp confirmado
 const PHONE_DISPLAY = "(21) 3333-7722"; // telefone fixo confirmado
 const WHATSAPP_DISPLAY = "(21) 99858-0049";
 const CLINIC_ADDRESS = "Rua Silva Cardoso, nº 555 — Bangu, Rio de Janeiro - RJ";
-const CLINIC_CNPJ = "19.956.319/0001-13";
 
 const UNIT_2 = {
   name: "Echo Diagnósticos — Unidade 2",
@@ -50,7 +49,7 @@ const EXAMS = [
   {slug:"usg-regiao-cervical", name:"Região cervical", cat:"Ultrassonografia", club:89, normal:110, note:"", schedule:true},
   {slug:"usg-regiao-inguinal", name:"Região inguinal", cat:"Ultrassonografia", club:79, normal:115, note:"Valor por lado", schedule:true},
   {slug:"usg-tireoide", name:"Tireóide", cat:"Ultrassonografia", club:76, normal:94, card:136, note:"", schedule:true},
-  {slug:"usg-transvaginal", name:"Ultrassom transvaginal", cat:"Ultrassonografia", club:59, normal:89, card:129, note:"Resultado na hora", schedule:true},
+  {slug:"usg-transvaginal", name:"Ultrassom transvaginal", cat:"Ultrassonografia", club:59, normal:89, card:129, note:"", schedule:true},
 
   {slug:"usg-abdome-superior-doppler", name:"Abdome superior com Doppler", cat:"Ultrassonografia com Doppler", club:115, normal:158, card:230, note:"", schedule:true},
   {slug:"usg-abdome-total-doppler", name:"Abdome total com Doppler", cat:"Ultrassonografia com Doppler", club:175, normal:255, card:369, note:"Exige preparo", schedule:true},
@@ -76,7 +75,7 @@ const EXAMS = [
   {slug:"usg-transfontanela-doppler", name:"Transfontanela com Doppler", cat:"Ultrassonografia com Doppler", club:157, normal:195, card:283, note:"", schedule:true},
 
   {slug:"densitometria", name:"Densitometria óssea", cat:"Raio-X Médico e Odontológico", club:39, normal:89, card:129, note:"Fêmur e coluna", schedule:true},
-  {slug:"mamografia", name:"Mamografia", cat:"Raio-X Médico e Odontológico", club:49, normal:99, card:129, note:"Todo dia (segunda a sábado), não precisa agendar", schedule:false},
+  {slug:"mamografia", name:"Mamografia", cat:"Raio-X Médico e Odontológico", club:49, normal:99, card:129, note:"De segunda a sábado, não precisa agendar", schedule:false},
   {slug:"rx-bacia", name:"Raio-X bacia — AP", cat:"Raio-X Médico e Odontológico", club:52, normal:58, card:85, note:"Não precisa agendar", schedule:false},
   {slug:"rx-cavum", name:"Raio-X cávum — AP e perfil", cat:"Raio-X Médico e Odontológico", club:62, normal:69, card:101, note:"Não precisa agendar", schedule:false},
   {slug:"rx-coluna-cervical", name:"Raio-X coluna cervical — AP e axial", cat:"Raio-X Médico e Odontológico", club:58, normal:65, card:95, note:"Não precisa agendar", schedule:false},
@@ -100,12 +99,12 @@ const EXAMS = [
   {slug:"rx-panoramico-odonto-sem-laudo", name:"Raio-X panorâmico odontológico — sem laudo", cat:"Raio-X Médico e Odontológico", club:39, normal:55, card:66, note:"Não precisa agendar", schedule:false},
 
   {slug:"ecg", name:"Eletrocardiograma com laudo", cat:"Exames Cardiológicos e Vascular", club:39, normal:79, card:115, note:"", schedule:true},
-  {slug:"eco-doppler", name:"Ecocardiograma com Doppler", cat:"Exames Cardiológicos e Vascular", club:99, normal:169, card:245, note:"Resultado na hora", schedule:true},
-  {slug:"doppler-venoso", name:"Doppler venoso", cat:"Exames Cardiológicos e Vascular", club:110, normal:179, card:254, note:"Valor por membro · resultado na hora", schedule:true},
+  {slug:"eco-doppler", name:"Ecocardiograma com Doppler", cat:"Exames Cardiológicos e Vascular", club:99, normal:169, card:245, note:"", schedule:true},
+  {slug:"doppler-venoso", name:"Doppler venoso", cat:"Exames Cardiológicos e Vascular", club:110, normal:179, card:254, note:"Valor por membro", schedule:true},
   {slug:"doppler-arterial", name:"Doppler arterial", cat:"Exames Cardiológicos e Vascular", club:110, normal:179, card:254, note:"Valor por membro", schedule:true},
   {slug:"doppler-carotidas", name:"Doppler de carótidas e vertebrais", cat:"Exames Cardiológicos e Vascular", club:110, normal:185, card:268, note:"", schedule:true},
-  {slug:"mapa-24h", name:"MAPA 24 horas", cat:"Exames Cardiológicos e Vascular", club:79, normal:175, card:253, note:"", schedule:true},
-  {slug:"holter-24h", name:"Holter 24 horas", cat:"Exames Cardiológicos e Vascular", club:89, normal:175, card:274, note:"Exige preparo", schedule:true},
+  {slug:"mapa-24h", name:"MAPA 24 horas", cat:"Exames Cardiológicos e Vascular", club:69, normal:175, card:253, note:"", schedule:true},
+  {slug:"holter-24h", name:"Holter 24 horas", cat:"Exames Cardiológicos e Vascular", club:89, normal:189, card:274, note:"", schedule:true},
 
   {slug:"pacote-oftalmo", name:"Pacote Oftalmo", cat:"Exames e Procedimentos do Oftalmo", club:59, normal:59, note:"Grau dos óculos, fundo de olho e pressão ocular · quarta de manhã e quinta à tarde", schedule:true},
   {slug:"mapeamento-retina", name:"Mapeamento da retina", cat:"Exames e Procedimentos do Oftalmo", club:136, normal:140, card:204, note:"", schedule:true},
@@ -128,23 +127,23 @@ const EXAMS = [
 
 const TOP_EXAM_SLUGS = ["usg-abdome-total","mamografia","eco-doppler","usg-transvaginal","doppler-venoso","rx-joelho"];
 
-const QUICK_RESULT_SLUGS = ["usg-transvaginal","usg-obstetrica","eco-doppler","doppler-venoso"];
+const QUICK_RESULT_SLUGS = ["rx-torax","rx-joelho","espirometria"];
 
 const PACKAGES = [
   {
     name:"Super Pacote Mulher", cat:"Saúde da mulher",
     items:["Ginecologista","Preventivo","USG transvaginal","USG mamária","Mamografia","Densitometria óssea"],
-    club:223, normal:561
+    club:333, normal:620, note:"Ginecologista com retorno em até 25 dias · economia anunciada no flyer: R$ 277"
   },
   {
     name:"Check-up Cardiológico", cat:"Cardiologia",
     items:["Cardiologista","Eletrocardiograma","Ecocardiograma"],
-    club:227, normal:406
+    club:227, normal:406, note:"Retorno da consulta em até 25 dias, quando necessário"
   },
   {
     name:"Pacote Risco Trombose", cat:"Exames Cardiológicos e Vascular",
     items:["Consulta com angiologista","Doppler venoso"],
-    club:79, normal:79, note:"Segunda, terça e sexta · resultado do exame e consulta no mesmo dia"
+    club:189, normal:null, note:"Consulta R$ 79 + Doppler venoso R$ 110 por membro no Club Echo · segunda, terça e sexta · resultado do exame e consulta na hora"
   }
 ];
 
@@ -152,21 +151,21 @@ const SPECIALTIES = [
   {slug:"angiologista", name:"Angiologista", days:"Quarta e sexta à tarde", club:79, normal:180, card:262, group:"Cardiovascular"},
   {slug:"cardiologista", name:"Cardiologista", days:"Terça, quarta, quinta, sexta e sábado", club:89, normal:158, card:230, group:"Cardiovascular"},
   {slug:"clinico-geral", name:"Clínico geral", days:"Segunda, quarta, quinta, sexta e sábado", club:49, normal:110, card:160, group:"Clínica geral e família"},
-  {slug:"dermatologista", name:"Dermatologista", days:"Quarta à tarde, de 15 em 15 dias · Unidade 2", club:89, normal:150, group:"Outras especialidades"},
-  {slug:"endocrinologista", name:"Endocrinologista", days:"Segunda de manhã/tarde e terça à tarde", club:59, normal:150, group:"Nutrição e metabolismo"},
-  {slug:"gastro", name:"Gastroenterologista", days:"Segunda e quarta de manhã", club:59, normal:130, group:"Outras especialidades"},
-  {slug:"geriatra", name:"Geriatra", days:"Segunda de manhã e sexta manhã/tarde", club:49, normal:110, group:"Clínica geral e família"},
-  {slug:"ginecologista", name:"Ginecologista", days:"De segunda a sábado", club:59, normal:123, group:"Saúde da mulher"},
-  {slug:"mastologista", name:"Mastologista", days:"Segunda-feira à tarde", club:69, normal:155, group:"Saúde da mulher"},
-  {slug:"nutricionista", name:"Nutricionista", days:"Segunda e terça pela manhã · Unidade 2", club:0, normal:150, group:"Nutrição e metabolismo"},
-  {slug:"oftalmologista", name:"Oftalmologista", days:"Quarta (dia todo) e quinta à tarde", club:59, normal:140, group:"Visão e audição"},
-  {slug:"ortopedista", name:"Ortopedista", days:"Segunda e quinta à tarde", club:59, normal:125, group:"Ortopedia e reumatologia"},
-  {slug:"otorrino", name:"Otorrinolaringologista", days:"Segunda à tarde", club:59, normal:120, group:"Visão e audição"},
-  {slug:"pediatra", name:"Pediatra", days:"Segunda, terça, quinta e sábado · Unidade 2", club:39, normal:120, group:"Clínica geral e família"},
-  {slug:"pre-natal", name:"Pré-natal", days:"Quarta, sexta e sábado", club:59, normal:130, group:"Saúde da mulher"},
-  {slug:"reumatologista", name:"Reumatologista", days:"Segunda e sábado, de 15 em 15 dias", club:39, normal:130, group:"Ortopedia e reumatologia"},
-  {slug:"risco-cirurgico", name:"Risco cirúrgico", days:"Terça, quarta, quinta, sexta e sábado", club:89, normal:150, group:"Outras especialidades"},
-  {slug:"urologista", name:"Urologista", days:"Terça e quinta à tarde", club:49, normal:130, group:"Outras especialidades"},
+  {slug:"dermatologista", name:"Dermatologista", days:"Quarta à tarde, de 15 em 15 dias · Unidade 2", club:89, normal:150, card:217, group:"Outras especialidades"},
+  {slug:"endocrinologista", name:"Endocrinologista", days:"Segunda de manhã/tarde e terça à tarde", club:59, normal:150, card:217, group:"Nutrição e metabolismo"},
+  {slug:"gastro", name:"Gastroenterologista", days:"Segunda e quarta de manhã", club:59, normal:130, card:188, group:"Outras especialidades"},
+  {slug:"geriatra", name:"Geriatra", days:"Segunda de manhã e sexta manhã/tarde", club:49, normal:110, card:160, group:"Clínica geral e família"},
+  {slug:"ginecologista", name:"Ginecologista", days:"De segunda a sábado", club:59, normal:128, card:185, group:"Saúde da mulher"},
+  {slug:"mastologista", name:"Mastologista", days:"Segunda-feira à tarde", club:69, normal:155, card:217, group:"Saúde da mulher"},
+  {slug:"nutricionista", name:"Nutricionista", days:"Segunda e terça pela manhã · Unidade 2", club:0, normal:150, card:217, group:"Nutrição e metabolismo"},
+  {slug:"oftalmologista", name:"Oftalmologista", days:"Quarta (dia todo) e quinta à tarde", club:59, normal:140, card:203, group:"Visão e audição"},
+  {slug:"ortopedista", name:"Ortopedista", days:"Segunda e quinta à tarde", club:59, normal:125, card:179, group:"Ortopedia e reumatologia"},
+  {slug:"otorrino", name:"Otorrinolaringologista", days:"Segunda à tarde", club:59, normal:120, card:174, group:"Visão e audição"},
+  {slug:"pediatra", name:"Pediatra", days:"Segunda, terça, quinta e sábado pela manhã (de 0 a 11 anos) · Unidade 2", club:39, normal:120, card:174, group:"Clínica geral e família"},
+  {slug:"pre-natal", name:"Pré-natal", days:"Quarta, sexta e sábado", club:59, normal:130, card:188, group:"Saúde da mulher"},
+  {slug:"reumatologista", name:"Reumatologista", days:"Segunda e sábado, de 15 em 15 dias", club:39, normal:130, card:188, group:"Ortopedia e reumatologia"},
+  {slug:"risco-cirurgico", name:"Risco cirúrgico", days:"Terça, quarta, quinta, sexta e sábado", club:89, normal:150, card:217, group:"Outras especialidades"},
+  {slug:"urologista", name:"Urologista", days:"Terça e quinta à tarde", club:49, normal:130, card:188, group:"Outras especialidades"},
   {slug:"cirurgiao-vascular", name:"Cirurgião vascular", days:"Sexta-feira à tarde", club:79, normal:160, card:232, group:"Cardiovascular"},
 ];
 

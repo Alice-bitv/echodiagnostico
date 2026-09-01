@@ -280,7 +280,7 @@ function renderPackages(containerId){
       <p class="note">${p.items.join(', ')}${p.note ? ' — ' + p.note : ''}.</p>
       <div class="price-compare">
         <div class="price-rows club"><span class="lbl">Club Echo</span><span class="val">${money(p.club)}</span></div>
-        ${p.club!==p.normal ? `<div class="price-rows normal"><span class="lbl">Sem Club Echo</span><span class="val">${money(p.normal)}</span></div>` : ''}
+        ${p.normal!=null && p.club!==p.normal ? `<div class="price-rows normal"><span class="lbl">Sem Club Echo</span><span class="val">${money(p.normal)}</span></div>` : ''}
       </div>
       <div class="cta-row"><a class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener" href="${waAgendarExame(p.name)}">Agendar Pacote</a></div>`;
     el.appendChild(card);
@@ -296,9 +296,11 @@ function renderQuickResults(containerId){
     if(!e) return;
     const card = document.createElement('div');
     card.className = 'exam-card';
+    const isXray = e.cat.indexOf('Raio-X') === 0;
     card.innerHTML = `
-      <span class="cat">Resultado na hora</span>
+      <span class="cat">${isXray ? 'Sem agendamento · imagem na hora' : 'Resultado na hora'}</span>
       <h4>${e.name}</h4>
+      <p class="note">${isXray ? 'Resultado em até 48 horas.' : e.note}</p>
       <div class="price-rows club"><span class="lbl">A partir de</span><span class="val">${money(e.club)}</span></div>
       <div class="cta-row"><a class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener" href="${waAgendarExame(e.name)}">Agendar</a></div>`;
     el.appendChild(card);
@@ -550,10 +552,55 @@ function wireRevealBlocks(){
   blocks.forEach(b=>io.observe(b));
 }
 
+/* ===================== AVISO DE VIGÊNCIA DO FLYER ===================== */
+function addFlyerValidityNotice(){
+  const page = location.pathname.split('/').pop() || 'index.html';
+  const pricingPages = ['exames.html','precos.html','especialidades.html','club-echo.html'];
+  if(!pricingPages.includes(page)) return;
+  const pageHeader = document.querySelector('.page-header, main > .club');
+  if(!pageHeader || document.querySelector('.page-source-notice')) return;
+  const noticeWrap = document.createElement('div');
+  noticeWrap.className = 'wrap page-source-notice';
+  noticeWrap.innerHTML = '<div class="source-notice" role="note"><strong>Vigência do flyer</strong><span>Valores da 2ª quinzena de julho de 2026. Confirme preço, preparo e disponibilidade antes do atendimento.</span></div>';
+  pageHeader.insertAdjacentElement('afterend', noticeWrap);
+}
+
+/* ===================== MOVIMENTO E PROFUNDIDADE ===================== */
+function wirePageMotion(){
+  const items = document.querySelectorAll('.section-head, .qa-item, .exam-card, .spec-card, .info-card, .source-notice');
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!items.length || !('IntersectionObserver' in window) || reducedMotion){
+    items.forEach(item=>item.classList.add('motion-in'));
+  } else {
+    items.forEach((item,index)=>{
+      item.classList.add('motion-ready');
+      item.style.setProperty('--motion-delay', Math.min(index % 6, 5) * 55 + 'ms');
+    });
+    const observer = new IntersectionObserver(entries=>{
+      entries.forEach(entry=>{
+        if(entry.isIntersecting){
+          entry.target.classList.add('motion-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {threshold:.12, rootMargin:'0px 0px -40px'});
+    items.forEach(item=>observer.observe(item));
+  }
+
+  const header = document.querySelector('header.site');
+  if(header){
+    const updateHeader = ()=>header.classList.toggle('is-scrolled', window.scrollY > 16);
+    updateHeader();
+    window.addEventListener('scroll', updateHeader, {passive:true});
+  }
+}
+
 /* ===================== INIT COMUM A TODAS AS PÁGINAS ===================== */
 document.addEventListener('DOMContentLoaded', function(){
   wireWhatsAppButtons();
   wireMobileMenu();
   markCurrentNav();
   wireRevealBlocks();
+  addFlyerValidityNotice();
+  requestAnimationFrame(wirePageMotion);
 });
