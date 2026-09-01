@@ -565,6 +565,14 @@ function addFlyerValidityNotice(){
   pageHeader.insertAdjacentElement('afterend', noticeWrap);
 }
 
+/* A faixa animada é um destaque exclusivo da página inicial. */
+function keepPromoTickerOnHome(){
+  const page = location.pathname.split('/').pop() || 'index.html';
+  if(page === 'index.html') return;
+  const ticker = document.querySelector('.promo-ticker');
+  if(ticker) ticker.remove();
+}
+
 /* ===================== MOVIMENTO E PROFUNDIDADE ===================== */
 function wirePageMotion(){
   const items = document.querySelectorAll('.section-head, .qa-item, .exam-card, .spec-card, .info-card, .source-notice');
@@ -600,6 +608,7 @@ document.addEventListener('DOMContentLoaded', function(){
   wireWhatsAppButtons();
   wireMobileMenu();
   markCurrentNav();
+  keepPromoTickerOnHome();
   wireRevealBlocks();
   addFlyerValidityNotice();
   requestAnimationFrame(wirePageMotion);

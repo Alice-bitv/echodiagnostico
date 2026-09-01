@@ -267,7 +267,8 @@ nav.primary a:hover, nav.primary a.current{background:var(--blue-050);color:var(
 .info-card p{font-size:14px;color:var(--gray-600);line-height:1.6;margin:0;}
 .source-notice{display:flex;align-items:flex-start;gap:14px;margin-top:16px;padding:16px 18px;border:1px solid #d5e3ed;border-radius:12px;background:#f5f9fc;color:var(--navy-800);font-size:13px;line-height:1.5;}
 .source-notice strong{flex:0 0 auto;font-family:var(--font-display);font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:var(--blue-700);}
-.page-source-notice{padding-top:18px;margin-bottom:-22px;}
+.page-source-notice{padding-top:18px;margin-bottom:0;}
+.page-source-notice + .wrap > .search-box.floaty{margin-top:18px;}
 @media(max-width:640px){.source-notice{flex-direction:column;gap:6px}}
 .placeholder-note{background:var(--blue-050);border:1px dashed var(--blue-600);border-radius:var(--radius-md);padding:16px 18px;font-size:13.5px;color:var(--navy-800);margin-top:18px;}
 footer{background:var(--navy-900);color:#B9CBDA;padding:56px 0 26px;}
