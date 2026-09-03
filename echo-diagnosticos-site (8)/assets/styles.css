@@ -1,5 +1,5 @@
 :root{
-  color-scheme: only light;
+  color-scheme: light only;
   --navy-900:#0A2540;
   --navy-800:#123A5E;
   --blue-600:#0F6FB0;
@@ -25,18 +25,82 @@
   --font-mono:'IBM Plex Mono', monospace;
 }
 *{box-sizing:border-box;}
-html{scroll-behavior:smooth;color-scheme:only light;background:#FAFBFC;}
-body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-page);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+html{scroll-behavior:smooth;color-scheme:light only;background:#FAFBFC;forced-color-adjust:none;}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-page);-webkit-font-smoothing:antialiased;overflow-x:hidden;forced-color-adjust:none;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ul{margin:0;padding:0;list-style:none;}
 h1,h2,h3,h4{font-family:var(--font-display);color:var(--navy-900);margin:0;}
 button{font-family:inherit;cursor:pointer;}
-input,select,textarea,button{color-scheme:only light;}
+input,select,textarea,button{color-scheme:light only;}
 @media (prefers-color-scheme:dark){
-  :root,html,body{color-scheme:only light;}
-  html,body{background-color:#FAFBFC;color:#152430;}
-  input,select,textarea,button{color-scheme:only light;}
+  :root,html,body{color-scheme:light only!important;}
+  html,body{background-color:#FAFBFC!important;color:#152430!important;}
+  input,select,textarea,button{color-scheme:light only!important;}
+
+  /* Alguns navegadores Android aplicam escurecimento forçado mesmo quando a
+     página declara tema claro. Uma imagem sólida preserva exatamente as cores
+     originais sem criar um gradiente visível. */
+  header.site,
+  header.site.is-scrolled{
+    background-color:#FFFFFF!important;
+    background-image:linear-gradient(#FFFFFF,#FFFFFF)!important;
+    border-bottom-color:#E8ECEE!important;
+  }
+  header.site .logo,
+  header.site .hamburger{
+    color:#0A2540!important;
+    -webkit-text-fill-color:#0A2540!important;
+  }
+  header.site .logo-tagline,
+  header.site .logo small{
+    color:#5B6670!important;
+    -webkit-text-fill-color:#5B6670!important;
+  }
+  header.site .btn-primary{
+    background-color:#0F6FB0!important;
+    background-image:linear-gradient(#0F6FB0,#0F6FB0)!important;
+    border-color:#0F6FB0!important;
+    color:#FFFFFF!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+  }
+  .hero{
+    background-color:#061C33!important;
+  }
+  .hero .btn-primary{
+    background-color:#FFFFFF!important;
+    background-image:linear-gradient(#FFFFFF,#FFFFFF)!important;
+    border-color:#FFFFFF!important;
+    color:#0A2540!important;
+    -webkit-text-fill-color:#0A2540!important;
+  }
+  .hero .btn-outline-light{
+    background-color:transparent!important;
+    border-color:rgba(255,255,255,.55)!important;
+    color:#FFFFFF!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+  }
+  .hero-copy h1,
+  .hero-trust strong{
+    color:#FFFFFF!important;
+    -webkit-text-fill-color:#FFFFFF!important;
+  }
+  .hero-copy h1 em{
+    color:#8FE0CB!important;
+    -webkit-text-fill-color:#8FE0CB!important;
+  }
+  .hero-copy p{
+    color:#D5E3ED!important;
+    -webkit-text-fill-color:#D5E3ED!important;
+  }
+  .hero-kicker{
+    color:#A9EAD9!important;
+    -webkit-text-fill-color:#A9EAD9!important;
+  }
+  .hero-trust span{
+    color:#A9BFD0!important;
+    -webkit-text-fill-color:#A9BFD0!important;
+  }
 }
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px;}
 .eyebrow{font-family:var(--font-display);font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-600);margin-bottom:10px;display:block;}
