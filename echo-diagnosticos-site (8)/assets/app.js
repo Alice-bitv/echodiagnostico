@@ -74,8 +74,7 @@ function markCurrentNav(){
 }
 
 /* ===================== EXAM CARD BUILDER ===================== */
-function buildExamCard(e, opts){
-  opts = opts || {};
+function buildExamCard(e){
   const card = document.createElement('div');
   card.className = 'exam-card';
   card.id = 'exame-' + e.slug;
@@ -92,8 +91,7 @@ function buildExamCard(e, opts){
       `}
     </div>
     <div class="cta-row">
-      ${opts.hideDetail ? '' : `<a class="btn btn-outline btn-sm" href="exames.html?exame=${e.slug}#exame-${e.slug}">Saiba Mais</a>`}
-      <a class="btn btn-primary btn-sm" target="_blank" rel="noopener" href="${waAgendarExame(e.name)}">Agendar</a>
+      <a class="btn btn-primary btn-sm btn-block" target="_blank" rel="noopener" href="${waAgendarExame(e.name)}">Agendar exame</a>
     </div>`;
   return card;
 }
@@ -163,7 +161,7 @@ function renderExamCatalog(gridId, filtersId, searchInputId, countId){
 
   // a busca por texto é ligada separadamente por wireExamAutocomplete()
 
-  // destaca e rola até o exame se veio de um link "Saiba mais"
+  // destaca e rola até o exame quando a URL solicita um item específico
   const params = new URLSearchParams(location.search);
   const target = params.get('exame');
   if(target){

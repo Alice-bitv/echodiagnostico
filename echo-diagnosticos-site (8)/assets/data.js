@@ -26,7 +26,7 @@ const FREE_EXAMS_PROMO = {
   items: ["Densitometria óssea", "Eletrocardiograma", "Hemograma completo", "Mamografia"]
 };
 
-/* Slug = identificador único usado nos links "Saiba mais" (não usar espaços/acentos) */
+/* Slug = identificador único usado nas buscas e âncoras (não usar espaços/acentos) */
 const EXAMS = [
   {slug:"usg-abdome-refluxo", name:"Abdome total — pesquisa de refluxo", cat:"Ultrassonografia", club:239, normal:275, note:"", schedule:true},
   {slug:"usg-abdome-superior", name:"Abdome superior", cat:"Ultrassonografia", club:85, normal:110, note:"", schedule:true},
