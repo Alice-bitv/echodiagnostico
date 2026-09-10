@@ -24,20 +24,43 @@
   --font-body:'Source Sans 3', sans-serif;
   --font-mono:'IBM Plex Mono', monospace;
 }
-*{box-sizing:border-box;color-scheme:only light;forced-color-adjust:none;}
-html{scroll-behavior:smooth;color-scheme:only light;background:#FAFBFC;forced-color-adjust:none;}
-body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-page);-webkit-font-smoothing:antialiased;overflow-x:hidden;forced-color-adjust:none;}
+*{box-sizing:border-box;color-scheme:only light;}
+html{scroll-behavior:smooth;color-scheme:only light;background:#FAFBFC;}
+body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-page);-webkit-font-smoothing:antialiased;overflow-x:hidden;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ul{margin:0;padding:0;list-style:none;}
 h1,h2,h3,h4{font-family:var(--font-display);color:var(--navy-900);margin:0;}
 button{font-family:inherit;cursor:pointer;}
-input,select,textarea,button{color-scheme:only light;}
+input,select,textarea,button{color-scheme:only light;background-color:#FFFFFF;color:#152430;}
 
-/* Proteção permanente contra o escurecimento forçado de navegadores móveis.
-   Não depende de prefers-color-scheme porque alguns aparelhos não informam
-   essa preferência para a página. */
-  :root,html,body{color-scheme:only light!important;}
+/* Compatibilidade com navegadores Android e WebViews que escurecem páginas
+   sem tema próprio. Declaramos suporte aos dois esquemas, mas repetimos a
+   paleta clara quando o aparelho pede escuro. Assim o navegador usa o tema
+   definido pelo site em vez de transformar automaticamente as cores. */
+@media (prefers-color-scheme: dark){
+  :root{color-scheme:only light;}
+  body,body *{color-scheme:only light;}
+  :root{
+    --navy-900:#0A2540;
+    --navy-800:#123A5E;
+    --blue-600:#0F6FB0;
+    --blue-700:#0B5990;
+    --blue-050:#EAF3FA;
+    --teal-500:#1E8A78;
+    --teal-050:#E7F4F1;
+    --gray-050:#F4F6F7;
+    --gray-100:#E8ECEE;
+    --gray-400:#8C99A3;
+    --gray-600:#5B6670;
+    --ink:#152430;
+    --white:#FFFFFF;
+    --bg-page:#FAFBFC;
+  }
+}
+
+/* Cores explícitas mantêm o resultado idêntico nos modos claro e escuro. */
+  :root,html,body,body *{color-scheme:only light!important;}
   html,body{background-color:#FAFBFC!important;color:#152430!important;}
   input,select,textarea,button{color-scheme:only light!important;}
 
@@ -47,11 +70,28 @@ input,select,textarea,button{color-scheme:only light;}
     background-color:#FFFFFF!important;
     background-image:linear-gradient(#FFFFFF,#FFFFFF)!important;
     border-bottom-color:#E8ECEE!important;
+    -webkit-backdrop-filter:none!important;
+    backdrop-filter:none!important;
   }
   header.site .logo,
   header.site .hamburger{
     color:#0A2540!important;
     -webkit-text-fill-color:#0A2540!important;
+  }
+  header.site .logo-badge,
+  .drawer-panel,
+  .drawer-panel .logo-badge{
+    background-color:#FFFFFF!important;
+    background-image:linear-gradient(#FFFFFF,#FFFFFF)!important;
+  }
+  .drawer-panel .logo,
+  .drawer-panel .logo-name{
+    color:#0A2540!important;
+    -webkit-text-fill-color:#0A2540!important;
+  }
+  .logo-icon{
+    filter:none!important;
+    mix-blend-mode:normal!important;
   }
   header.site .logo-tagline,
   header.site .logo small{
@@ -101,6 +141,20 @@ input,select,textarea,button{color-scheme:only light;}
   .hero-trust span{
     color:#A9BFD0!important;
     -webkit-text-fill-color:#A9BFD0!important;
+  }
+  input,
+  textarea,
+  select{
+    background-color:#FFFFFF!important;
+    color:#152430!important;
+    -webkit-text-fill-color:#152430!important;
+    caret-color:#152430!important;
+  }
+  input::placeholder,
+  textarea::placeholder{
+    color:#8C99A3!important;
+    -webkit-text-fill-color:#8C99A3!important;
+    opacity:1!important;
   }
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px;}
 .eyebrow{font-family:var(--font-display);font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-600);margin-bottom:10px;display:block;}
