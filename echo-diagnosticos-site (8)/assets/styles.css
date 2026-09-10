@@ -1,5 +1,5 @@
 :root{
-  color-scheme: light only;
+  color-scheme: only light;
   --navy-900:#0A2540;
   --navy-800:#123A5E;
   --blue-600:#0F6FB0;
@@ -24,23 +24,24 @@
   --font-body:'Source Sans 3', sans-serif;
   --font-mono:'IBM Plex Mono', monospace;
 }
-*{box-sizing:border-box;}
-html{scroll-behavior:smooth;color-scheme:light only;background:#FAFBFC;forced-color-adjust:none;}
+*{box-sizing:border-box;color-scheme:only light;forced-color-adjust:none;}
+html{scroll-behavior:smooth;color-scheme:only light;background:#FAFBFC;forced-color-adjust:none;}
 body{margin:0;font-family:var(--font-body);color:var(--ink);background:var(--bg-page);-webkit-font-smoothing:antialiased;overflow-x:hidden;forced-color-adjust:none;}
 img{max-width:100%;display:block;}
 a{color:inherit;text-decoration:none;}
 ul{margin:0;padding:0;list-style:none;}
 h1,h2,h3,h4{font-family:var(--font-display);color:var(--navy-900);margin:0;}
 button{font-family:inherit;cursor:pointer;}
-input,select,textarea,button{color-scheme:light only;}
-@media (prefers-color-scheme:dark){
-  :root,html,body{color-scheme:light only!important;}
-  html,body{background-color:#FAFBFC!important;color:#152430!important;}
-  input,select,textarea,button{color-scheme:light only!important;}
+input,select,textarea,button{color-scheme:only light;}
 
-  /* Alguns navegadores Android aplicam escurecimento forçado mesmo quando a
-     página declara tema claro. Uma imagem sólida preserva exatamente as cores
-     originais sem criar um gradiente visível. */
+/* Proteção permanente contra o escurecimento forçado de navegadores móveis.
+   Não depende de prefers-color-scheme porque alguns aparelhos não informam
+   essa preferência para a página. */
+  :root,html,body{color-scheme:only light!important;}
+  html,body{background-color:#FAFBFC!important;color:#152430!important;}
+  input,select,textarea,button{color-scheme:only light!important;}
+
+  /* A imagem sólida preserva a cor original sem criar gradiente visível. */
   header.site,
   header.site.is-scrolled{
     background-color:#FFFFFF!important;
@@ -101,7 +102,6 @@ input,select,textarea,button{color-scheme:light only;}
     color:#A9BFD0!important;
     -webkit-text-fill-color:#A9BFD0!important;
   }
-}
 .wrap{max-width:var(--max);margin:0 auto;padding:0 20px;}
 .eyebrow{font-family:var(--font-display);font-size:12.5px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;color:var(--blue-600);margin-bottom:10px;display:block;}
 .section{padding:64px 0;}
