@@ -20,12 +20,6 @@ const UNIT_2 = {
   specialties: ["Nutricionista", "Pediatra", "Dermatologista"]
 };
 
-const FREE_EXAMS_PROMO = {
-  title: "4 exames grátis para o titular",
-  desc: "Pagando os 12 meses do Club Echo adiantado, via PIX ou crédito, por R$ 358,80",
-  items: ["Densitometria óssea", "Eletrocardiograma", "Hemograma completo", "Mamografia"]
-};
-
 /* Slug = identificador único usado nas buscas e âncoras (não usar espaços/acentos) */
 const EXAMS = [
   {slug:"usg-abdome-refluxo", name:"Abdome total — pesquisa de refluxo", cat:"Ultrassonografia", club:239, normal:275, note:"", schedule:true},

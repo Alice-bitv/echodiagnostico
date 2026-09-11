@@ -8,7 +8,7 @@ completamente o que "segurança" significa aqui — veja a seção 4.
 
 ```
 /index.html, /precos.html, /exames.html, /especialidades.html,
-/club-echo.html, /unidades.html, /convenios.html, /sobre.html
+/club-echo.html, /unidades.html, /sobre.html
 /assets/styles.css   → cores, fontes, layout
 /assets/data.js      → todos os preços, exames e especialidades
 /assets/app.js       → busca, filtros, menu, links de WhatsApp, animações

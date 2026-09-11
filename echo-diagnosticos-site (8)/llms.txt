@@ -10,7 +10,6 @@
 - [Preços](https://alice-bitv.github.io/echodiagnostico/echo-diagnosticos-site%20(8)/precos.html)
 - [Club Echo](https://alice-bitv.github.io/echodiagnostico/echo-diagnosticos-site%20(8)/club-echo.html)
 - [Unidades](https://alice-bitv.github.io/echodiagnostico/echo-diagnosticos-site%20(8)/unidades.html)
-- [Convênios](https://alice-bitv.github.io/echodiagnostico/echo-diagnosticos-site%20(8)/convenios.html)
 - [Sobre](https://alice-bitv.github.io/echodiagnostico/echo-diagnosticos-site%20(8)/sobre.html)
 
 ## Informações da clínica

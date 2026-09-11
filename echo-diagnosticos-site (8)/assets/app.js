@@ -550,30 +550,9 @@ function wireRevealBlocks(){
   blocks.forEach(b=>io.observe(b));
 }
 
-/* ===================== AVISO DE VIGÊNCIA DO FLYER ===================== */
-function addFlyerValidityNotice(){
-  const page = location.pathname.split('/').pop() || 'index.html';
-  const pricingPages = ['exames.html','precos.html','especialidades.html','club-echo.html'];
-  if(!pricingPages.includes(page)) return;
-  const pageHeader = document.querySelector('.page-header, main > .club');
-  if(!pageHeader || document.querySelector('.page-source-notice')) return;
-  const noticeWrap = document.createElement('div');
-  noticeWrap.className = 'wrap page-source-notice';
-  noticeWrap.innerHTML = '<div class="source-notice" role="note"><strong>Vigência do flyer</strong><span>Valores da 2ª quinzena de julho de 2026. Confirme preço, preparo e disponibilidade antes do atendimento.</span></div>';
-  pageHeader.insertAdjacentElement('afterend', noticeWrap);
-}
-
-/* A faixa animada é um destaque exclusivo da página inicial. */
-function keepPromoTickerOnHome(){
-  const page = location.pathname.split('/').pop() || 'index.html';
-  if(page === 'index.html') return;
-  const ticker = document.querySelector('.promo-ticker');
-  if(ticker) ticker.remove();
-}
-
 /* ===================== MOVIMENTO E PROFUNDIDADE ===================== */
 function wirePageMotion(){
-  const items = document.querySelectorAll('.section-head, .qa-item, .exam-card, .spec-card, .info-card, .source-notice');
+  const items = document.querySelectorAll('.section-head, .qa-item, .exam-card, .spec-card, .info-card');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!items.length || !('IntersectionObserver' in window) || reducedMotion){
     items.forEach(item=>item.classList.add('motion-in'));
@@ -592,13 +571,6 @@ function wirePageMotion(){
     }, {threshold:.12, rootMargin:'0px 0px -40px'});
     items.forEach(item=>observer.observe(item));
   }
-
-  const header = document.querySelector('header.site');
-  if(header){
-    const updateHeader = ()=>header.classList.toggle('is-scrolled', window.scrollY > 16);
-    updateHeader();
-    window.addEventListener('scroll', updateHeader, {passive:true});
-  }
 }
 
 /* ===================== INIT COMUM A TODAS AS PÁGINAS ===================== */
@@ -606,8 +578,6 @@ document.addEventListener('DOMContentLoaded', function(){
   wireWhatsAppButtons();
   wireMobileMenu();
   markCurrentNav();
-  keepPromoTickerOnHome();
   wireRevealBlocks();
-  addFlyerValidityNotice();
   requestAnimationFrame(wirePageMotion);
 });
