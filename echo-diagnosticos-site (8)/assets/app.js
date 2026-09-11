@@ -106,8 +106,8 @@ function renderTopExams(containerId){
   });
 }
 
-/* ===================== RENDER: FULL EXAM CATALOG (exames.html) ===================== */
-/* Estado do catálogo: categoria ativa + termo de busca, combinados */
+/* ===================== RENDER: FULL EXAM LIST (exames.html) ===================== */
+/* Estado da listagem: categoria ativa + termo de busca, combinados */
 const _catalogState = { cat: 'Todos', q: '' };
 
 function _catalogFilteredExams(){

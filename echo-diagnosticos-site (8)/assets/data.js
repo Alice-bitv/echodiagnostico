@@ -127,7 +127,7 @@ const PACKAGES = [
   {
     name:"Super Pacote Mulher", cat:"Saúde da mulher",
     items:["Ginecologista","Preventivo","USG transvaginal","USG mamária","Mamografia","Densitometria óssea"],
-    club:333, normal:620, note:"Ginecologista com retorno em até 25 dias · economia anunciada no flyer: R$ 277"
+    club:333, normal:620, note:"Ginecologista com retorno em até 25 dias · economia de R$ 277"
   },
   {
     name:"Check-up Cardiológico", cat:"Cardiologia",
