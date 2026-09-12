@@ -32,6 +32,8 @@ function waFaleConosco(){
   return waLink("Olá! Gostaria de mais informações sobre a Echo Diagnósticos.");
 }
 
+const CLUB_ECHO_PAYMENT_URL = "pagamento-club-echo.html";
+
 /* ===================== APLICA LINKS DE WHATSAPP NA PÁGINA =====================
    Qualquer elemento com data-wa="agendar-exame" | "agendar-consulta" | "club" |
    "fale-conosco" vira automaticamente um link de WhatsApp. */
@@ -41,7 +43,6 @@ function wireWhatsAppButtons(){
     let href = "#";
     if(kind === 'agendar-exame') href = waAgendarGenerico();
     else if(kind === 'agendar-consulta') href = waConsultaGenerico();
-    else if(kind === 'club') href = waClubEcho();
     else if(kind === 'fale-conosco') href = waFaleConosco();
     el.setAttribute('href', href);
     el.setAttribute('target', '_blank');
@@ -82,6 +83,14 @@ function wireMobileMenu(){
   drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeDrawer));
   document.addEventListener('keydown', event=>{
     if(event.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+}
+
+function wireClubEchoPayments(){
+  document.querySelectorAll('[data-club-payment]').forEach(el=>{
+    el.setAttribute('href', CLUB_ECHO_PAYMENT_URL);
+    el.removeAttribute('target');
+    el.removeAttribute('rel');
   });
 }
 
@@ -652,6 +661,7 @@ function wirePageMotion(){
 /* ===================== INIT COMUM A TODAS AS PÁGINAS ===================== */
 document.addEventListener('DOMContentLoaded', function(){
   wireWhatsAppButtons();
+  wireClubEchoPayments();
   wireMobileMenu();
   wireMobileScrollHeader();
   markCurrentNav();

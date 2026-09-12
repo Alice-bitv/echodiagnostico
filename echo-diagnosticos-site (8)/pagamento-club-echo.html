@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="only light">
+<meta name="supported-color-schemes" content="light">
+<meta name="theme-color" content="#071F35">
+<meta name="robots" content="noindex,nofollow">
+<title>Prévia de pagamento | Club Echo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Public+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="stylesheet" href="assets/styles.css?v=20260912-payment-preview">
+</head>
+<body class="checkout-preview-page">
+<header class="checkout-preview-header">
+  <div class="wrap">
+    <a href="club-echo.html" class="logo" aria-label="Voltar para o Club Echo">
+      <img src="assets/img/logo-echo-icon.webp" alt="" class="logo-icon">
+      <span class="logo-name">Echo Diagnósticos<small class="logo-tagline">Club Echo</small></span>
+    </a>
+    <span class="checkout-secure-label">Pagamento seguro</span>
+  </div>
+</header>
+
+<main id="conteudo" class="checkout-preview-main">
+  <div class="checkout-preview-shell">
+    <a class="checkout-back" href="club-echo.html">← Voltar para o Club Echo</a>
+    <span class="eyebrow">Prévia do pagamento</span>
+    <h1>Assinar Club Echo</h1>
+    <p class="checkout-intro">Escolha a condição da assinatura antes de seguir para o ambiente de pagamento.</p>
+
+    <fieldset class="checkout-options">
+      <legend class="visually-hidden">Condição da assinatura</legend>
+      <label class="checkout-option">
+        <input type="radio" name="club-plan" value="monthly" checked>
+        <span>
+          <strong>Assinatura mensal</strong>
+          <small>Cobrança de R$ 29,90 por mês</small>
+        </span>
+        <b>R$ 29,90<small>/mês</small></b>
+      </label>
+      <label class="checkout-option">
+        <input type="radio" name="club-plan" value="annual">
+        <span>
+          <strong>12 meses adiantados</strong>
+          <small>Pagamento por PIX ou crédito</small>
+        </span>
+        <b>R$ 358,80</b>
+      </label>
+    </fieldset>
+
+    <div class="checkout-summary">
+      <div><span>Assinatura</span><strong id="checkoutPlanName">Club Echo mensal</strong></div>
+      <div><span>Pessoas incluídas</span><strong>Titular + 4 pessoas</strong></div>
+      <div class="checkout-total"><span>Total</span><strong id="checkoutPlanTotal">R$ 29,90 por mês</strong></div>
+    </div>
+
+    <p class="checkout-disclaimer">Sem carência e sem taxa de adesão. O Club Echo não é plano de saúde; é uma assinatura de descontos em saúde.</p>
+    <button class="btn btn-teal btn-lg btn-block" type="button" id="previewPaymentButton">Continuar para pagamento seguro</button>
+    <p class="checkout-preview-note" id="previewPaymentNote" aria-live="polite">Prévia visual: nenhuma cobrança será realizada.</p>
+  </div>
+</main>
+
+<script>
+const planName = document.getElementById('checkoutPlanName');
+const planTotal = document.getElementById('checkoutPlanTotal');
+document.querySelectorAll('input[name="club-plan"]').forEach(input => {
+  input.addEventListener('change', () => {
+    const annual = input.value === 'annual';
+    planName.textContent = annual ? 'Club Echo, 12 meses adiantados' : 'Club Echo mensal';
+    planTotal.textContent = annual ? 'R$ 358,80' : 'R$ 29,90 por mês';
+  });
+});
+document.getElementById('previewPaymentButton').addEventListener('click', () => {
+  document.getElementById('previewPaymentNote').textContent = 'No site final, o checkout oficial será aberto aqui.';
+});
+</script>
+</body>
+</html>
