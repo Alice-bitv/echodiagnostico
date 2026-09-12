@@ -54,14 +54,90 @@ function wireMobileMenu(){
   const drawer = document.getElementById('drawer');
   const menuBtn = document.getElementById('menuBtn');
   if(!drawer || !menuBtn) return;
-  function openDrawer(){ drawer.classList.add('open'); menuBtn.setAttribute('aria-expanded','true'); }
-  function closeDrawer(){ drawer.classList.remove('open'); menuBtn.setAttribute('aria-expanded','false'); }
-  menuBtn.addEventListener('click', openDrawer);
+  const header = document.querySelector('header.site');
+  function openDrawer(){
+    if(header){
+      header.classList.remove('is-hidden');
+      document.documentElement.style.setProperty('--mobile-menu-header-height', header.offsetHeight + 'px');
+    }
+    drawer.classList.add('open');
+    document.documentElement.classList.add('mobile-menu-open');
+    menuBtn.setAttribute('aria-expanded','true');
+    menuBtn.setAttribute('aria-label','Fechar menu');
+  }
+  function closeDrawer(){
+    drawer.classList.remove('open');
+    document.documentElement.classList.remove('mobile-menu-open');
+    menuBtn.setAttribute('aria-expanded','false');
+    menuBtn.setAttribute('aria-label','Abrir menu');
+  }
+  menuBtn.addEventListener('click', ()=>{
+    if(drawer.classList.contains('open')) closeDrawer();
+    else openDrawer();
+  });
   const closeBtn = document.getElementById('closeDrawer');
   if(closeBtn) closeBtn.addEventListener('click', closeDrawer);
   const bg = document.getElementById('drawerBg');
   if(bg) bg.addEventListener('click', closeDrawer);
   drawer.querySelectorAll('a').forEach(a=>a.addEventListener('click', closeDrawer));
+  document.addEventListener('keydown', event=>{
+    if(event.key === 'Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+}
+
+/* ===================== CABEÇALHO MÓVEL POR DIREÇÃO DE ROLAGEM ===================== */
+function wireMobileScrollHeader(){
+  const header = document.querySelector('header.site');
+  if(!header) return;
+
+  const mobile = window.matchMedia('(max-width: 760px)');
+  const drawer = document.getElementById('drawer');
+  const minDelta = 6;
+  let lastY = Math.max(window.scrollY, 0);
+  let frame = 0;
+
+  function showHeader(){ header.classList.remove('is-hidden'); }
+
+  function update(force){
+    const currentY = Math.max(window.scrollY, 0);
+
+    if(!mobile.matches){
+      header.classList.remove('mobile-scroll-header', 'is-hidden', 'is-scrolled');
+      lastY = currentY;
+      return;
+    }
+
+    header.classList.add('mobile-scroll-header');
+    header.classList.toggle('is-scrolled', currentY > 8);
+
+    const menuOpen = drawer && drawer.classList.contains('open');
+    const delta = currentY - lastY;
+    const beyondHeader = currentY > header.offsetHeight + 12;
+
+    if(menuOpen || currentY <= 8){
+      showHeader();
+    } else if(force || Math.abs(delta) >= minDelta){
+      if(delta > 0 && beyondHeader) header.classList.add('is-hidden');
+      else if(delta < 0) showHeader();
+    }
+
+    if(force || Math.abs(delta) >= minDelta) lastY = currentY;
+  }
+
+  function onScroll(){
+    if(frame) return;
+    frame = requestAnimationFrame(()=>{
+      frame = 0;
+      update(false);
+    });
+  }
+
+  function syncMode(){ update(true); }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  if(typeof mobile.addEventListener === 'function') mobile.addEventListener('change', syncMode);
+  else mobile.addListener(syncMode);
+  syncMode();
 }
 
 /* ===================== MARCA LINK ATIVO NO MENU ===================== */
@@ -320,11 +396,11 @@ function renderSpecialties(containerId, limit, activeGroup){
     c.innerHTML = `
       <h4>${s.name}</h4>
       <div class="days">${s.days}</div>
-      <div class="prices">
-        ${s.club!=null ? `<span class="c">${money(s.club)}</span>` : '<span></span>'}
-        <span class="n">${money(s.normal)}</span>
+      <div class="price-compare">
+        ${s.club!=null ? `<div class="price-rows club"><span class="lbl">Club Echo</span><span class="val">${money(s.club)}</span></div>` : ''}
+        <div class="price-rows normal"><span class="lbl">Sem Club Echo (dinheiro/Pix)</span><span class="val">${money(s.normal)}</span></div>
+        ${s.card!=null ? `<div class="price-rows normal"><span class="lbl">Débito/Crédito</span><span class="val">${money(s.card)}</span></div>` : ''}
       </div>
-      ${s.card!=null ? `<div style="font-size:11.5px;color:var(--gray-600);">Débito/Crédito: ${money(s.card)}</div>` : ''}
       <a class="btn btn-outline btn-sm btn-block" target="_blank" rel="noopener" href="${waAgendarConsulta(s.name)}">Agendar Consulta</a>`;
     el.appendChild(c);
   });
@@ -577,6 +653,7 @@ function wirePageMotion(){
 document.addEventListener('DOMContentLoaded', function(){
   wireWhatsAppButtons();
   wireMobileMenu();
+  wireMobileScrollHeader();
   markCurrentNav();
   wireRevealBlocks();
   requestAnimationFrame(wirePageMotion);
